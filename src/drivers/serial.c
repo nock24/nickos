@@ -1,3 +1,4 @@
+#include "common.h"
 #include "drivers/serial.h"
 #include "peripherals/aux.h"
 #include "drivers/gpio.h"
@@ -33,11 +34,22 @@ void serial_write_byte(char byte) {
 
 void serial_write_str(const char* str) {
     while (*str) {
-        if (*str == '\n') {
+        char c = *str;
+        if (c == '\n') {
             serial_write_byte('\r');
         }
-        serial_write_byte(*str);
+        serial_write_byte(c);
         str++;
+    }
+}
+
+void serial_write_str_slice(const StrSlice str) {
+    for (size_t i = 0; i < str.len; i++) {
+        char c = str.chars[i];
+        if (c == '\n') {
+            serial_write_byte('\r');
+        }
+        serial_write_byte(c);
     }
 }
 
@@ -55,11 +67,11 @@ StrSlice serial_read_line(char* buf, u32 buf_len) {
     flush();
 
     u32 input_end;
-    for (u32 i = 0; i < buf_len; i++) {
+    for (size_t i = 0; i < buf_len; i++) {
         char c = serial_read_byte();
         if (c == '\r') {
             serial_write_str("\n");
-            input_end = i + 1;
+            input_end = i;
             break;
         }
         serial_write_byte(c);

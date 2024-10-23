@@ -7,18 +7,11 @@ Str to_str(char* s) {
         len++;
         tmp++;
     }
-
-    Str str;
-    str.chars = s;
-    str.len = len;
-    return str;
+    return (Str){ s, len };
 }
 
 StrSlice str_slice(const char* str, u32 start, u32 end) {
-    StrSlice slice;
-    slice.chars = &str[start];
-    slice.len = end - start;
-    return slice;
+    return (StrSlice){ &str[start], end - start };
 }
 
 void str_cpy(const Str src, char* dest) {

@@ -24,6 +24,7 @@ $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.S
 
 C_FILES := $(wildcard $(SRC_DIR)/*.c)
 C_FILES += $(wildcard $(SRC_DIR)/*/*.c)
+C_FILES += $(wildcard $(SRC_DIR)/*/*/*.c)
 ASM_FILES := $(wildcard $(SRC_DIR)/*.S)
 ASM_FILES += $(wildcard $(SRC_DIR)/*/*.S)
 
