@@ -7,7 +7,7 @@ typedef enum CommandName {
 } CommandName;
 
 typedef union CommandParams {
-    StrSlice echo;
+    Str echo;
 } CommandParams;
 
 typedef struct Command {
@@ -26,4 +26,4 @@ typedef enum ParseCmdError {
 } ParseCmdError;
 DeclResult(Command, ParseCmdError);
 
-Result(Command, ParseCmdError) parse_cmd(StrSlice str);
+Result(Command, ParseCmdError) parse_cmd(ConstStr str);

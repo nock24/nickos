@@ -1,11 +1,8 @@
 #pragma once
 
-#include "stddef.h"
-#include "stdint.h"
-
-typedef _Bool bool;
-#define false 0
-#define true 1
+#include <stdint.h>
+#include <stdbool.h>
+#include <stddef.h>
 
 typedef uint8_t u8;
 typedef uint16_t u16;

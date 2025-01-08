@@ -1,4 +1,3 @@
-#include "common.h"
 #define Optional(T) optional_##T##_t
 #define DeclOptional(T) \
     typedef struct {    \
@@ -6,9 +5,13 @@
         T value;        \
     } Optional(T)
 
-#define Some(val, T)    \
-    (Optional(T)){      \
-        .none = false,  \
-        .value = val    \
+#define Some(T, val)   \
+    (Optional(T)){     \
+        .none = false, \
+        .value = val,  \
     }
-#define None(T) (Optional(T)){ true, {} }
+#define None(T)       \
+    (Optional(T)){    \
+        .none = true, \
+        .value = {},  \
+    }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.h"
+#include "basic_types.h"
 #include "peripherals/base.h"
 
 #define TIME_BASE (PBASE + 0x3000)

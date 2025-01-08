@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.h"
+#include "basic_types.h"
 #include "peripherals/base.h"
 
 #define AUX_BASE (PBASE + 0x00215000)
