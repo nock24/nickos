@@ -1,15 +1,15 @@
-#include "kernel/shell/commands.h"
-#include "drivers/serial.h"
+#include "shell/commands.h"
+#include "drivers/uart.h"
 #include "mem.h"
 
 void os_info() {
-    serial_write("Operating System: NickOS mk1\n");
+    uart_puts("Operating System: NickOS mk1\n");
 }
 
 void echo(const CommandParams* params) {
     ConstStr str = params->echo;
-    serial_write_str(str);
-    serial_write("\n");
+    uart_puts(str.chars);
+    uart_puts("\n");
 }
 
 void run_cmd(const Command* cmd) {

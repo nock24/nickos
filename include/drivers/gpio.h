@@ -1,44 +1,22 @@
 #pragma once
 
-#include "basic_types.h"
-#include "peripherals/base.h"
+#define MMIO_BASE       0x3F000000
 
-#define GPIO_BASE (PBASE + 0x00200000)
-
-typedef struct GpioPinData {
-    reg32 reserved;
-    reg32 data[2];
-} GpioPinData;
-
-typedef struct GpioRegs {
-    reg32 func_select[6];
-    GpioPinData output_set;
-    GpioPinData output_clear;
-    GpioPinData level;
-    GpioPinData ev_detect_status;
-    GpioPinData re_detect_enable;
-    GpioPinData fe_detect_enable;
-    GpioPinData hi_detect_enable;
-    GpioPinData lo_detect_enable;
-    GpioPinData async_re_detect;
-    GpioPinData async_fe_detect;
-    reg32 reserved;
-    reg32 pupd_enable;
-    reg32 pupd_enable_clocks[2];
-} GpioRegs;
-
-#define GPIO_REGS ((GpioRegs*)(GPIO_BASE))
-
-typedef enum GpioFunc {
-    GFInput = 0,
-    GFOutput = 1,
-    GFAlt0 = 4,
-    GFAlt1 = 5,
-    GFAlt2 = 6,
-    GFAlt3 = 7,
-    GFAlt4 = 3,
-    GFAlt5 = 2,
-} GpioFunc;
-
-void gpio_pin_set_func(u8 pin_number, GpioFunc func);
-void gpio_pin_enable(u8 pin_number);
+#define GPFSEL0         ((volatile unsigned int*)(MMIO_BASE+0x00200000))
+#define GPFSEL1         ((volatile unsigned int*)(MMIO_BASE+0x00200004))
+#define GPFSEL2         ((volatile unsigned int*)(MMIO_BASE+0x00200008))
+#define GPFSEL3         ((volatile unsigned int*)(MMIO_BASE+0x0020000C))
+#define GPFSEL4         ((volatile unsigned int*)(MMIO_BASE+0x00200010))
+#define GPFSEL5         ((volatile unsigned int*)(MMIO_BASE+0x00200014))
+#define GPSET0          ((volatile unsigned int*)(MMIO_BASE+0x0020001C))
+#define GPSET1          ((volatile unsigned int*)(MMIO_BASE+0x00200020))
+#define GPCLR0          ((volatile unsigned int*)(MMIO_BASE+0x00200028))
+#define GPLEV0          ((volatile unsigned int*)(MMIO_BASE+0x00200034))
+#define GPLEV1          ((volatile unsigned int*)(MMIO_BASE+0x00200038))
+#define GPEDS0          ((volatile unsigned int*)(MMIO_BASE+0x00200040))
+#define GPEDS1          ((volatile unsigned int*)(MMIO_BASE+0x00200044))
+#define GPHEN0          ((volatile unsigned int*)(MMIO_BASE+0x00200064))
+#define GPHEN1          ((volatile unsigned int*)(MMIO_BASE+0x00200068))
+#define GPPUD           ((volatile unsigned int*)(MMIO_BASE+0x00200094))
+#define GPPUDCLK0       ((volatile unsigned int*)(MMIO_BASE+0x00200098))
+#define GPPUDCLK1       ((volatile unsigned int*)(MMIO_BASE+0x0020009C))

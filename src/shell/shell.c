@@ -1,7 +1,8 @@
-#include "kernel/shell/shell.h"
-#include "kernel/shell/commands.h"
-#include "kernel/panic.h"
-#include "drivers/serial.h"
+#include "shell/shell.h"
+#include "shell/commands.h"
+#include "panic.h"
+#include "drivers/uart.h"
+#include "serial.h"
 #include "str.h"
 #include "optional.h"
 #include "mem.h"
@@ -9,7 +10,7 @@
 
 __attribute((noreturn)) void start_shell() {
     while (true) {
-        serial_write("[guest@nickos] -> ");
+        uart_puts("[guest@nickos] -> ");
 
         char buf[32];
         mem_set(buf, 32, '\0');
@@ -20,16 +21,16 @@ __attribute((noreturn)) void start_shell() {
             run_cmd(&as_value(cmd_result));
         } else switch (as_error(cmd_result)) {
             case NotEnoughArgs:
-                serial_write("Not enough arguments.\n");
+                uart_puts("Not enough arguments.\n");
                 break;
             case TooManyArgs:
-                serial_write("Too many arguments.\n");
+                uart_puts("Too many arguments.\n");
                 break;
             case InvalidCmd:
-                serial_write("Invalid command.\n");
+                uart_puts("Invalid command.\n");
                 break;
             case InvalidArg:
-                serial_write("Invalid argument.\n");
+                uart_puts("Invalid argument.\n");
                 break;
         }
     }
