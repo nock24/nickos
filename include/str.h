@@ -13,3 +13,4 @@ Str to_str(char* s);
 ConstStr to_const_str(const char* s);
 ConstStr str_slice(const char* str, u32 start, u32 end);
 bool str_cmp(const char* a, const char* b);
+void set_null(char* str, size_t len);

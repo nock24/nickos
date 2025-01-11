@@ -48,3 +48,10 @@ bool str_cmp(const char* a, const char* b) {
         i++;
     }
 }
+
+/// Sets all characters to null terminators.
+void set_null(char* str, size_t len) {
+    for (size_t i = 0; i < len; i++) {
+        str[i] = '\0';
+    }
+}

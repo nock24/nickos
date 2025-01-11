@@ -1,7 +1,7 @@
 GNU := aarch64-linux-gnu
 
-C_FLAGS := -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
-ZIG_FLAGS := -target aarch64-linux-gnu -O ReleaseSmall -fstrip -Iinclude
+C_FLAGS := -O3 -nostdlib -Wall -ffreestanding -nostartfiles -Iinclude -mgeneral-regs-only
+ZIG_FLAGS := -target aarch64-linux-gnu -Iinclude -O ReleaseFast -fstrip
 ASM_FLAGS := -Iinclude
 
 SRC_DIR := src

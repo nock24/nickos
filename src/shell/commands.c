@@ -1,6 +1,6 @@
 #include "shell/commands.h"
 #include "drivers/uart.h"
-#include "mem.h"
+#include "str.h"
 
 void os_info() {
     uart_puts("Operating System: NickOS mk1\n");
@@ -101,7 +101,7 @@ Result(Command, ParseCmdError) parse_cmd(ConstStr str) {
         .idx = 0,
     };
     char cmd_name_buf[MAX_CMD_NAME_LEN + 1]; // Extra space for null terminator.
-    mem_set(cmd_name_buf, MAX_CMD_NAME_LEN + 1, '\0');
+    set_null(cmd_name_buf, MAX_CMD_NAME_LEN + 1);
     size_t args_start;
     bool has_args;
 

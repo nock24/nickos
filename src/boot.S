@@ -17,8 +17,8 @@ _start:
     b proc_hang
 
 master:
-    adr x0, bss_begin
-    adr x1, bss_end
+    adr x0, __bss_begin__
+    adr x1, __bss_end__
     sub x1, x1, x0
     bl memzero
 

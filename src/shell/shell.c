@@ -5,7 +5,6 @@
 #include "serial.h"
 #include "str.h"
 #include "optional.h"
-#include "mem.h"
 #include "result.h"
 
 __attribute((noreturn)) void start_shell() {
@@ -13,7 +12,7 @@ __attribute((noreturn)) void start_shell() {
         uart_puts("[guest@nickos] -> ");
 
         char buf[32];
-        mem_set(buf, 32, '\0');
+        set_null(buf, 32);
         ConstStr input = serial_read_line(buf, 31); // Free space for null terminator
 
         Result(Command, ParseCmdError) cmd_result = parse_cmd(input);

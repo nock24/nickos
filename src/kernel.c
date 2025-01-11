@@ -5,7 +5,7 @@
 #include "shell/shell.h"
 #include "drivers/sd.h"
 
-extern u8 bss_end;
+extern u8 __bss_end__;
 
 __attribute__((noreturn)) void kernel_main() {
     uart_init();
@@ -14,9 +14,9 @@ __attribute__((noreturn)) void kernel_main() {
     u32* counter = (u32*)(&bss_end + 508);
 
     if(sd_init()==SD_OK) {
-        if(sd_readblock(1, &bss_end ,1)) {
+        if(sd_readblock(1, &__bss_end__ ,1)) {
             (*counter)++;
-            if(sd_writeblock(&bss_end, 1 ,1)) {
+            if(sd_writeblock(&__bss_end__, 1 ,1)) {
                 uart_puts("Boot counter ");
                 uart_hex(*counter);
                 uart_puts(" written to SD card.\n");
